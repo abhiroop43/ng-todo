@@ -1,0 +1,50 @@
+<h2>Task Details</h2>
+<form [formGroup]="todoEditForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="taskName">Task Name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="taskName"
+      placeholder="Task Name"
+      formControlName="name">
+  </div>
+  <div class="form-group">
+    <label for="taskDescription">Task Description</label>
+    <textarea
+      class="form-control"
+      id="taskDescription"
+      placeholder="Task Description"
+      formControlName="description"></textarea>
+  </div>
+  <div class="form-group">
+    <label for="dueDate">Task Due Date</label>
+    <input
+      type="text"
+      id="dueDate"
+      class="form-control"
+      placeholder="dueDate"
+      formControlName="dueDate">
+    <p class="help-block">Please provide date in dd/MM/yyyy format</p>
+  </div>
+  <!--<div class="checkbox">-->
+    <!--<label>-->
+      <!--<input type="checkbox"> Mark as completed-->
+    <!--</label>-->
+  <!--</div>-->
+  <span
+    class="help-block"
+    *ngIf="todoEditForm.invalid && todoEditForm.touched">
+    Form is invalid. Please check your input.
+  </span>
+  <button
+    type="submit"
+    class="btn btn-primary"
+    [disabled]="todoEditForm.invalid">Submit</button>
+  <button
+    type="button"
+    class="btn btn-default"
+    (click)="onCancel()">
+    Cancel
+  </button>
+</form>

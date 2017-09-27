@@ -1,0 +1,6 @@
+<div class="list-group">
+    <a class="list-group-item" *ngFor="let todo of todos; let i = index"
+        [routerLink]="['/edit', i]">
+      {{todo.name}} - {{todo.dueDate}}
+    </a>
+</div>
