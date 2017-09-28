@@ -27,7 +27,7 @@ export class TodosService {
   }
 
   getTodo(id: number): Todo {
-    return this.todos[id];
+    return this.todos.slice()[id];
   }
 
   addTodo(newTodo: Todo) {
@@ -42,6 +42,11 @@ export class TodosService {
 
   deleteTodo(id: number) {
     this.todos.splice(id, 1);
+    this.todosChanged.next(this.todos.slice());
+  }
+
+  markAsComplete(id: number) {
+    this.todos[id].isComplete = true;
     this.todosChanged.next(this.todos.slice());
   }
 }

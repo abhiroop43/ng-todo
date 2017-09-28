@@ -27,13 +27,14 @@
       formControlName="dueDate">
     <p class="help-block">Please provide date in dd/MM/yyyy format</p>
   </div>
-  <!--<div class="checkbox">-->
-    <!--<label>-->
-      <!--<input type="checkbox"> Mark as completed-->
-    <!--</label>-->
-  <!--</div>-->
+  <div class="form-group" *ngIf="editMode">
+    <label>
+      Status:
+    </label>
+    {{status}}
+  </div>
   <span
-    class="help-block"
+    class="help-block" style="color: red;"
     *ngIf="todoEditForm.invalid && todoEditForm.touched">
     Form is invalid. Please check your input.
   </span>
@@ -41,6 +42,18 @@
     type="submit"
     class="btn btn-primary"
     [disabled]="todoEditForm.invalid">Submit</button>
+  <button
+    type="button"
+    class="btn btn-success"
+    *ngIf="editMode"
+    (click)="markComplete()">Mark as Complete
+  </button>
+  <button
+    type="button"
+    class="btn btn-danger"
+    *ngIf="editMode"
+    (click)="removeTask()">Delete
+  </button>
   <button
     type="button"
     class="btn btn-default"

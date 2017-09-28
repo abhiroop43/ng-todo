@@ -13,6 +13,7 @@ export class TodoEditComponent implements OnInit, OnDestroy {
   selectedToDoId: number;
   editMode = false;
   sub: Subscription = null;
+  status = '';
   todoEditForm: FormGroup;
   constructor(private route: ActivatedRoute,
               private todoService: TodosService,
@@ -43,6 +44,7 @@ export class TodoEditComponent implements OnInit, OnDestroy {
       taskName = currentTodo.name;
       taskDescription = currentTodo.description;
       taskDueDate = currentTodo.dueDate;
+      this.status = (currentTodo.isComplete) ? 'Completed' : 'Pending';
       this.todoEditForm.setValue({
           name: taskName,
           description: taskDescription,
@@ -53,18 +55,26 @@ export class TodoEditComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    // console.log(this.todoEditForm);
     if (this.editMode) {
       this.todoService.updateTodo(this.selectedToDoId, this.todoEditForm.value);
     } else {
       this.todoService.addTodo(this.todoEditForm.value);
     }
-    // this.todoEditForm.reset();
     this.onCancel();
   }
 
   onCancel() {
     this.router.navigateByUrl('/list');
+  }
+
+  markComplete() {
+    this.todoService.markAsComplete(this.selectedToDoId);
+    this.onCancel();
+  }
+
+  removeTask() {
+    this.todoService.deleteTodo(this.selectedToDoId);
+    this.onCancel();
   }
 
   ngOnDestroy(): void {
