@@ -8,6 +8,8 @@ import {AppRoutingModule} from './app-routing.module';
 import {HeaderComponent} from './header/header.component';
 import {TodosService} from './todos/todos.service';
 import {ReactiveFormsModule} from '@angular/forms';
+import {RemoteService} from './shared/remote.service';
+import {HttpModule} from '@angular/http';
 
 @NgModule({
   declarations: [
@@ -19,9 +21,10 @@ import {ReactiveFormsModule} from '@angular/forms';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpModule
   ],
-  providers: [TodosService],
+  providers: [RemoteService, TodosService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

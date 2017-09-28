@@ -5,23 +5,8 @@ import {Subject} from 'rxjs/Subject';
 @Injectable()
 export class TodosService {
   todosChanged = new Subject<Todo[]>();
-  private todos: Todo[] = [
-    new Todo(
-      'Get Milk',
-      'Buy Milk from store',
-      '22/01/2017'
-    ),
-    new Todo(
-      'Deliver Products',
-      'Deliver products to customer',
-      '24/03/2017'
-    ),
-    new Todo(
-      'Attend Lunch',
-      'Attend Lunch with Vendors',
-      '18/02/2017'
-    )
-  ];
+
+  private todos: Todo[] = [];
   getTodos(): Todo[] {
     return this.todos.slice();
   }
@@ -38,6 +23,10 @@ export class TodosService {
   updateTodo(id: number, newTodo: Todo) {
     this.todos[id] = newTodo;
     this.todosChanged.next(this.todos.slice());
+  }
+
+  setAllTodos(todos: Todo[]) {
+    this.todos = todos;
   }
 
   deleteTodo(id: number) {

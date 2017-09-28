@@ -3,6 +3,8 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {TodosService} from '../todos.service';
+import {RemoteService} from '../../shared/remote.service';
+import {Response} from '@angular/http';
 
 @Component({
   selector: 'app-todo-edit',
@@ -17,6 +19,7 @@ export class TodoEditComponent implements OnInit, OnDestroy {
   todoEditForm: FormGroup;
   constructor(private route: ActivatedRoute,
               private todoService: TodosService,
+              private remote: RemoteService,
               private router: Router) {}
 
   ngOnInit() {
@@ -60,7 +63,12 @@ export class TodoEditComponent implements OnInit, OnDestroy {
     } else {
       this.todoService.addTodo(this.todoEditForm.value);
     }
-    this.onCancel();
+    this.remote.setTodos().subscribe(
+      (response: Response) => {
+        console.log(response);
+        this.onCancel();
+      }
+    );
   }
 
   onCancel() {
@@ -69,12 +77,22 @@ export class TodoEditComponent implements OnInit, OnDestroy {
 
   markComplete() {
     this.todoService.markAsComplete(this.selectedToDoId);
-    this.onCancel();
+    this.remote.setTodos().subscribe(
+      (response: Response) => {
+        console.log(response);
+        this.onCancel();
+      }
+    );
   }
 
   removeTask() {
     this.todoService.deleteTodo(this.selectedToDoId);
-    this.onCancel();
+    this.remote.setTodos().subscribe(
+      (response: Response) => {
+        console.log(response);
+        this.onCancel();
+      }
+    );
   }
 
   ngOnDestroy(): void {

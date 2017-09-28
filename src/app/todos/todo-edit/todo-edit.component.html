@@ -41,12 +41,13 @@
   <button
     type="submit"
     class="btn btn-primary"
-    [disabled]="todoEditForm.invalid">Submit</button>
+    [disabled]="todoEditForm.invalid || status === 'Completed'">Submit
+  </button>
   <button
     type="button"
     class="btn btn-success"
     *ngIf="editMode"
-    (click)="markComplete()">Mark as Complete
+    (click)="markComplete()" [disabled]="status === 'Completed'">Mark as Complete
   </button>
   <button
     type="button"
