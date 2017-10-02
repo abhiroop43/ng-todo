@@ -7,7 +7,7 @@ import {TodoEditComponent} from './todos/todo-edit/todo-edit.component';
 import {AppRoutingModule} from './app-routing.module';
 import {HeaderComponent} from './header/header.component';
 import {TodosService} from './todos/todos.service';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RemoteService} from './shared/remote.service';
 import {HttpModule} from '@angular/http';
 import {SignInComponent} from './auth/sign-in/sign-in.component';
@@ -27,7 +27,8 @@ import {AuthService} from './auth/auth.service';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpModule
+    HttpModule,
+    FormsModule
   ],
   providers: [RemoteService, TodosService, AuthService],
   bootstrap: [AppComponent]
