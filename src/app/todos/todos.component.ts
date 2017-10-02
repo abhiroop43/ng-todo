@@ -17,7 +17,6 @@ export class TodosComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.todos = this.todosService.getTodos();
     this.remote.getTodos().map(
       (response: Response) => {
         return response.json();
@@ -27,9 +26,9 @@ export class TodosComponent implements OnInit {
         (todos: Todo[]) => {
           this.todosService.setAllTodos(todos);
           this.todos = todos;
+          console.log(this.todos);
         }
       );
-    console.log(this.todos);
   }
 
 }

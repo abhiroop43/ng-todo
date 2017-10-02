@@ -10,13 +10,18 @@ import {TodosService} from './todos/todos.service';
 import {ReactiveFormsModule} from '@angular/forms';
 import {RemoteService} from './shared/remote.service';
 import {HttpModule} from '@angular/http';
+import {SignInComponent} from './auth/sign-in/sign-in.component';
+import {SignUpComponent} from './auth/sign-up/sign-up.component';
+import {AuthService} from './auth/auth.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     TodosComponent,
     TodoEditComponent,
-    HeaderComponent
+    HeaderComponent,
+    SignInComponent,
+    SignUpComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +29,7 @@ import {HttpModule} from '@angular/http';
     ReactiveFormsModule,
     HttpModule
   ],
-  providers: [RemoteService, TodosService],
+  providers: [RemoteService, TodosService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
