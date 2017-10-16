@@ -5,6 +5,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {TodosService} from '../todos.service';
 import {RemoteService} from '../../shared/remote.service';
 import {Response} from '@angular/http';
+import {AuthService} from '../../auth/auth.service';
 
 @Component({
   selector: 'app-todo-edit',
@@ -19,6 +20,7 @@ export class TodoEditComponent implements OnInit, OnDestroy {
   todoEditForm: FormGroup;
   constructor(private route: ActivatedRoute,
               private todoService: TodosService,
+              private authService: AuthService,
               private remote: RemoteService,
               private router: Router) {}
 
@@ -58,6 +60,7 @@ export class TodoEditComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
+    this.todoEditForm.value.createdBy = this.authService.getCurrentUserName();
     if (this.editMode) {
       this.todoService.updateTodo(this.selectedToDoId, this.todoEditForm.value);
     } else {

@@ -16,6 +16,9 @@ export class TodosService {
   }
 
   addTodo(newTodo: Todo) {
+    if (this.todos == null) {
+      this.todos = [];
+    }
     this.todos.push(newTodo);
     this.todosChanged.next(this.todos.slice());
   }

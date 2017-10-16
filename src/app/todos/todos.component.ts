@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {TodosService} from './todos.service';
 import {RemoteService} from '../shared/remote.service';
-import 'rxjs/Rx';
 import {Response} from '@angular/http';
 import {Todo} from './todo.model';
 
@@ -17,11 +16,7 @@ export class TodosComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.remote.getTodos().map(
-      (response: Response) => {
-        return response.json();
-      }
-    )
+    this.remote.getTodos()
       .subscribe(
         (todos: Todo[]) => {
           this.todosService.setAllTodos(todos);

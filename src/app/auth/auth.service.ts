@@ -5,9 +5,8 @@ import {Router} from '@angular/router';
 @Injectable()
 export class AuthService {
   token: string;
+  currentUserName: string;
 
-  @Output()
-  userSignedIn: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(private router: Router) {
   }
@@ -25,7 +24,7 @@ export class AuthService {
             .then(
               (token: string) => {
                 this.token = token;
-                this.userSignedIn.emit(true);
+                this.currentUserName = firebase.auth().currentUser.email;
                 this.router.navigate(['/login']);
               }
             );
@@ -47,7 +46,7 @@ export class AuthService {
             .then(
               (token: string) => {
                 this.token = token;
-                this.userSignedIn.emit(true);
+                this.currentUserName = firebase.auth().currentUser.email;
                 this.router.navigate(['/list']);
               }
             );
@@ -65,7 +64,6 @@ export class AuthService {
     firebase.auth().signOut()
       .then(
         (response) => {
-          this.userSignedIn.emit(false);
           console.log('User logged out successfully', response);
           this.router.navigate(['/']);
         }
@@ -80,6 +78,10 @@ export class AuthService {
         }
       );
     return this.token;
+  }
+
+  getCurrentUserName() {
+    return this.currentUserName;
   }
 
 }
