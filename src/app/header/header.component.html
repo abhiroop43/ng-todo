@@ -20,8 +20,18 @@
         <li routerLinkActive="active"><a routerLink="/new">Create New Task</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a routerLink="/register">Register</a></li>
-        <li><a routerLink="/login">Login</a></li>
+        <ng-template [ngIf]="!authService.isAuthenticated()">
+          <li><a routerLink="/register">Register</a></li>
+          <li><a routerLink="/login">Login</a></li>
+        </ng-template>
+
+          <li>
+            <a
+            style="cursor: pointer;"
+            *ngIf="authService.isAuthenticated()"
+            (click)="logoutUser()">Logout</a>
+          </li>
+
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
