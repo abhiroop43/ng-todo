@@ -65,7 +65,7 @@ export class AuthService {
       .then(
         (response) => {
           console.log('User logged out successfully', response);
-          this.router.navigate(['/']);
+          this.router.navigate(['/home']);
         }
       );
   }

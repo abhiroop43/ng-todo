@@ -13,6 +13,8 @@ import {HttpModule} from '@angular/http';
 import {SignInComponent} from './auth/sign-in/sign-in.component';
 import {SignUpComponent} from './auth/sign-up/sign-up.component';
 import {AuthService} from './auth/auth.service';
+import { HomeComponent } from './home/home.component';
+import {AuthGuard} from './auth/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,8 @@ import {AuthService} from './auth/auth.service';
     TodoEditComponent,
     HeaderComponent,
     SignInComponent,
-    SignUpComponent
+    SignUpComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +33,7 @@ import {AuthService} from './auth/auth.service';
     HttpModule,
     FormsModule
   ],
-  providers: [RemoteService, TodosService, AuthService],
+  providers: [RemoteService, TodosService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
